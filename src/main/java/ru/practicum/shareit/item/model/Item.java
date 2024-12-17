@@ -13,6 +13,7 @@ public class Item {
     private String name;
     private String description;
     private Boolean available;
-    private Long ownerId; // владелец
+    private Long owner;
     private Long request;
+
 }

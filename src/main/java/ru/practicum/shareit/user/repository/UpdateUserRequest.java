@@ -6,15 +6,15 @@ import lombok.Data;
 @Data
 @Builder
 public class UpdateUserRequest {
-    private Long userId;
-    private String userName;
-    private String userEmail;
+    private Long id;
+    private String name;
+    private String email;
 
     public boolean hasName() {
-        return userName.isBlank();
+        return name != null && !name.isBlank();
     }
 
     public boolean hasEmail() {
-        return userEmail.isBlank();
+        return email != null && !email.isBlank();
     }
 }

@@ -37,15 +37,15 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDto updateUser(UpdateUserRequest request) {
-        User user = userRepository.getUserById(request.getUserId()).get();
+        User user = userRepository.getUserById(request.getId()).get();
         if (request.hasEmail() &&
-                !request.getUserEmail().equals(user.getUserEmail()) &&
-                isEmailRegistered(request.getUserEmail())) {
+                !request.getEmail().equals(user.getEmail()) &&
+                isEmailRegistered(request.getEmail())) {
             throw new BadRequestException("Данный e-mail уже зарегистрирован");
         }
-        UserMapper.updateFields(user, request);
+        UserMapper.updateUserFields(user, request);
         userRepository.updateUser(user);
-        return UserMapper.toUserDto(userRepository.getUserById(user.getUserId()).get());
+        return UserMapper.toUserDto(userRepository.getUserById(user.getId()).get());
     }
 
     @Override

@@ -17,16 +17,16 @@ public class UserRepositoryImpl  implements UserRepository{
 
     @Override
     public User createUser(User user) {
-        user.setUserId(userId++);
-        userStorage.put(user.getUserId(), user);
+        user.setId(userId++);
+        userStorage.put(user.getId(), user);
         log.info("Пользователь {} добавлен", user);
         return user;
     }
 
     @Override
     public void updateUser(User user) {
-        userStorage.put(user.getUserId(), user);
-        log.info("Пользователь с id {} обновлен", user.getUserId());
+        userStorage.put(user.getId(), user);
+        log.info("Пользователь с id {} обновлен", user.getId());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class UserRepositoryImpl  implements UserRepository{
     @Override
     public boolean isEmailRegistered(String userEmail) {
         return userStorage.values().stream()
-                .map(User::getUserEmail)
+                .map(User::getEmail)
                 .anyMatch(k -> k.equals(userEmail));
     }
 }

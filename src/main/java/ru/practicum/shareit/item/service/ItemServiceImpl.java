@@ -25,7 +25,7 @@ public class ItemServiceImpl implements ItemService{
     @Override
     public ItemDto updateItem(UpdateItemRequest request) {
         Item item = itemRepository.getItemById(request.getId()).get();
-        ItemMapper.updateFields(item, request);
+        ItemMapper.updateItemFields(item, request);
         itemRepository.updateItem(item);
         return ItemMapper.toItemDto(itemRepository.getItemById(item.getId()).get());
     }

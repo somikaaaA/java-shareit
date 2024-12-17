@@ -6,26 +6,26 @@ import ru.practicum.shareit.user.repository.UpdateUserRequest;
 public class UserMapper {
     public static UserDto toUserDto(User user) {
         return UserDto.builder()
-                .userId(user.getUserId())
-                .userName(user.getUserName())
-                .userEmail(user.getUserEmail())
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
                 .build();
     }
 
-    public static User toUser (UserDto userDto) {
+    public static User toUser(UserDto userDto) {
         return User.builder()
-                .userId(userDto.getUserId())
-                .userName(userDto.getUserName())
-                .userEmail(userDto.getUserEmail())
+                .id(userDto.getId())
+                .name(userDto.getName())
+                .email(userDto.getEmail())
                 .build();
     }
 
-    public static void updateFields(User user, UpdateUserRequest request) {
+    public static void updateUserFields(User user, UpdateUserRequest request) {
         if (request.hasName()) {
-            user.setUserName(request.getUserName());
+            user.setName(request.getName());
         }
         if (request.hasEmail()) {
-            user.setUserEmail(request.getUserEmail());
+            user.setEmail(request.getEmail());
         }
     }
 }

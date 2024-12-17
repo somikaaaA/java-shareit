@@ -17,35 +17,33 @@ public class ItemRepositoryImpl implements ItemRepository{
     private final Map<Long, Item> itemStorage;
     private Long id = 0L;
 
-    @Override
     public Item createItem(Item item) {
         item.setId(++id);
-        itemStorage.put(item.getId(),item);
-        log.info("Вещь {} добавлена", item);
+        //log.info("Добавление вещи {} ", item);
+        itemStorage.put(item.getId(), item);
+        //log.info("Вещь {} добавлена в базу данных", item);
+        log.info("Вещь добавлена в базу данных. Присвоен id = {}", item.getId());
         return item;
     }
 
-    @Override
     public void updateItem(Item item) {
+        //log.info("Обновление вещи с id {}", item.getId());
         itemStorage.put(item.getId(), item);
-        log.info("Вещь с id {} обновлена", item.getId());
+        log.info("Обновленная вещь с id = {} добавлена в базу данных", item);
     }
 
-    @Override
     public Optional<Item> getItemById(Long id) {
-        log.info("Поиск вещи с id {}", id);
+        log.info("Поиск вещи с id = {}", id);
         return Optional.ofNullable(itemStorage.get(id));
     }
 
-    @Override
     public List<Item> getItemsForUser(Long userId) {
-        log.info("Поиск вещей для пользователя с id {}", userId);
+        log.info("Поиск вещей для пользователя с id = {}", userId);
         return itemStorage.values().stream()
-                .filter(k -> k.getOwnerId().equals(userId))
+                .filter(k -> k.getOwner().equals(userId))
                 .toList();
     }
 
-    @Override
     public List<Item> searchItems(String text) {
         log.info("Поиск вещей по совпадению с \"{}\"", text);
         return itemStorage.values().stream()

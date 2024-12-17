@@ -9,7 +9,8 @@ import lombok.Data;
 @Data
 @Builder
 public class User {
-    private Long userId;
-    private String userName;
-    private String userEmail;
+    private Long id;  //уникальный идентификатор пользователя
+    private String name; // имя или логин пользователя
+    private String email;  //адрес электронной почты, проверка на уникальность
+
 }

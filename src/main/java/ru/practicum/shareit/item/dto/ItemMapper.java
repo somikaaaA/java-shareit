@@ -4,7 +4,7 @@ import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.UpdateItemRequest;
 
 public class ItemMapper {
-    public static ItemDto toItemDto (Item item) {
+    public static ItemDto toItemDto(Item item) {
         return ItemDto.builder()
                 .id(item.getId())
                 .name(item.getName())
@@ -13,18 +13,18 @@ public class ItemMapper {
                 .build();
     }
 
-    public static Item toItem (ItemDto itemDto) {
+    public static Item toItem(ItemDto itemDto) {
         return Item.builder()
                 .id(itemDto.getId())
                 .name(itemDto.getName())
                 .description(itemDto.getDescription())
                 .available(itemDto.getAvailable())
-                .ownerId(itemDto.getOwnerId())
+                .owner(itemDto.getOwner())
                 .request(itemDto.getRequest())
                 .build();
     }
 
-    public static void updateFields(Item item, UpdateItemRequest request) {
+    public static void updateItemFields(Item item, UpdateItemRequest request) {
         if (request.hasName()) {
             item.setName(request.getName());
         }

@@ -5,15 +5,13 @@ import ru.practicum.shareit.user.model.User;
 import java.util.Optional;
 
 public interface UserRepository {
+    Optional<User> getUserById(Long id);
+
     User createUser(User user);
 
     void updateUser(User user);
 
-    Optional<User> getUserById(Long userId);
+    void deleteUserById(Long id);
 
-    void deleteUserById(Long userId);
-
-    boolean isEmailRegistered(String userEmail);
-
-
+    boolean isEmailRegistered(String email);
 }
