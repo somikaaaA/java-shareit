@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class UserRepositoryImpl  implements UserRepository{
+public class UserRepositoryImpl  implements UserRepository {
     private final Map<Long, User> userStorage;
     private Long userId = 0L;
 

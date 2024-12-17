@@ -13,21 +13,18 @@ import java.util.regex.Pattern;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class ItemRepositoryImpl implements ItemRepository{
+public class ItemRepositoryImpl implements ItemRepository {
     private final Map<Long, Item> itemStorage;
     private Long id = 0L;
 
     public Item createItem(Item item) {
         item.setId(++id);
-        //log.info("Добавление вещи {} ", item);
         itemStorage.put(item.getId(), item);
-        //log.info("Вещь {} добавлена в базу данных", item);
         log.info("Вещь добавлена в базу данных. Присвоен id = {}", item.getId());
         return item;
     }
 
     public void updateItem(Item item) {
-        //log.info("Обновление вещи с id {}", item.getId());
         itemStorage.put(item.getId(), item);
         log.info("Обновленная вещь с id = {} добавлена в базу данных", item);
     }

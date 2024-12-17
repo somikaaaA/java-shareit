@@ -13,7 +13,6 @@ import lombok.Data;
 @Builder
 public class ItemDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    //Свойство может быть только для чтения. Запрет на изменение через JSon
     private Long id;
     @NotBlank(message = "Поле name должно быть заполнено")
     private String name;
