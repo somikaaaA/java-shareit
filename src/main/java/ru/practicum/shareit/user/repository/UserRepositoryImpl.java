@@ -19,26 +19,26 @@ public class UserRepositoryImpl  implements UserRepository{
     public User createUser(User user) {
         user.setId(userId++);
         userStorage.put(user.getId(), user);
-        log.info("Пользователь {} добавлен", user);
+        log.info("Пользователь добавлен. Присвоен id = {}", user.getId());
         return user;
     }
 
     @Override
     public void updateUser(User user) {
         userStorage.put(user.getId(), user);
-        log.info("Пользователь с id {} обновлен", user.getId());
+        log.info("Пользователь с id = {} обновлен", user.getId());
     }
 
     @Override
     public Optional<User> getUserById(Long userId) {
-        log.info("Поиск пользователя с id {}", userId);
+        log.info("Поиск пользователя с id = {}", userId);
         return Optional.ofNullable(userStorage.get(userId));
     }
 
     @Override
     public void deleteUserById(Long userId) {
         userStorage.remove(userId);
-        log.info("Пользователь с id {} удален", userId);
+        log.info("Пользователь с id = {} удален", userId);
     }
 
     @Override
