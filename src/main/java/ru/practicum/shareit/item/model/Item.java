@@ -3,9 +3,6 @@ package ru.practicum.shareit.item.model;
 import lombok.Builder;
 import lombok.Data;
 
-/**
- * TODO Sprint add-controllers.
- */
 @Data
 @Builder
 public class Item {
@@ -15,5 +12,4 @@ public class Item {
     private Boolean available;
     private Long owner;
     private Long request;
-
 }

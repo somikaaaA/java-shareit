@@ -3,6 +3,8 @@ package ru.practicum.shareit.item.repository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import ru.practicum.shareit.item.dto.ItemDto;
+import ru.practicum.shareit.item.dto.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     public void updateItem(Item item) {
         itemStorage.put(item.getId(), item);
-        log.info("Обновленная вещь с id = {} добавлена в базу данных", item);
+        log.info("Обновленная вещь с id = {} добавлена в базу данных", item.getId());
     }
 
     public Optional<Item> getItemById(Long id) {

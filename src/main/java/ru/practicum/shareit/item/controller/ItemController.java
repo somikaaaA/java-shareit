@@ -12,10 +12,6 @@ import ru.practicum.shareit.validation.UserIdValid;
 
 import java.util.List;
 
-/**
- * TODO Sprint add-controllers.
- */
-
 @RestController
 @RequestMapping("/items")
 @RequiredArgsConstructor

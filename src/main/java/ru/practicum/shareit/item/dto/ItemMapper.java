@@ -1,8 +1,13 @@
 package ru.practicum.shareit.item.dto;
 
+import jakarta.validation.Valid;
+import lombok.experimental.UtilityClass;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.UpdateItemRequest;
 
+import java.util.Optional;
+
+@UtilityClass
 public class ItemMapper {
     public static ItemDto toItemDto(Item item) {
         return ItemDto.builder()
