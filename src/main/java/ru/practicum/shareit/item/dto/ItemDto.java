@@ -5,6 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
+import ru.practicum.shareit.booking.model.Booking;
+import ru.practicum.shareit.item.model.Comment;
+import ru.practicum.shareit.user.model.User;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -18,7 +23,10 @@ public class ItemDto {
     @NotNull(message = "Поле available должно быть заполнено")
     private Boolean available;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Long owner;
+    private User owner;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long request;
+    private Booking lastBooking;
+    private Booking nextBooking;
+    private List<Comment> comments;
 }
