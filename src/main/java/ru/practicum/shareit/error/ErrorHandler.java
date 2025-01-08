@@ -66,7 +66,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500
-    public ErrorResponse invalidEmail(InvalidEmailException e) { //исключение для некорректного email
+    public ErrorResponse invalidEmail(InvalidFieldException e) { //исключение для некорректного email
         log.error("Неверно указан email");
         return new ErrorResponse("В запросе неверно указан email. " + e.getMessage());
     }

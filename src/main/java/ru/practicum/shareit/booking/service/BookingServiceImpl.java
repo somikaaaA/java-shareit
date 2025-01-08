@@ -11,9 +11,8 @@ import ru.practicum.shareit.booking.status.Status;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.booking.status.Strategy;
 import ru.practicum.shareit.booking.status.StrategyFactory;
-import ru.practicum.shareit.exception.InvalidBookingIdException;
-import ru.practicum.shareit.exception.InvalidItemIdException;
-import ru.practicum.shareit.exception.InvalidParameterForBooking;
+import ru.practicum.shareit.exception.InvalidFieldException;
+import ru.practicum.shareit.exception.InvalidIdException;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.user.model.User;
@@ -35,14 +34,14 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public BookingDto createBooking(Long userId, BookingDto bookingDto) {
         if (bookingDto.getStart().equals(bookingDto.getEnd())) {
-            throw new InvalidParameterForBooking("Дата начала и конца бронирования не может совпадать");
+            throw new InvalidFieldException("Дата начала и конца бронирования не может совпадать");
         }
         User user = userservice.getUserById(userId);
 
         Item item = itemRepository.findById(bookingDto.getItemId())
-                .orElseThrow(() -> new InvalidItemIdException("Вещь с id " + bookingDto.getItemId() + " не найдена"));
+                .orElseThrow(() -> new InvalidIdException("Вещь с id " + bookingDto.getItemId() + " не найдена"));
         if (!item.getAvailable()) {
-            throw new InvalidParameterForBooking("Вещь не доступна для бронирования");
+            throw new InvalidFieldException("Вещь не доступна для бронирования");
         }
         Booking booking = BookingMapper.toBooking(bookingDto, user, item);
         BookingDto savedBookingDto = BookingMapper.toBookingDto(bookingRepository.save(booking));
@@ -53,10 +52,10 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public BookingDto createApprove(Long userId, Long bookingId, boolean approved) {
         Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() -> new InvalidBookingIdException("Вещь с id " + bookingId + " не найдена"));
+                .orElseThrow(() -> new InvalidIdException("Вещь с id " + bookingId + " не найдена"));
 
         if (!booking.getItem().getOwner().getId().equals(userId)) {
-            throw new InvalidParameterForBooking("Статус может менять только хозяин вещи. Пользователь с id " +
+            throw new InvalidFieldException("Статус может менять только хозяин вещи. Пользователь с id " +
                     userId + " не является хозяином вещи с id " + booking.getItem().getId());
         }
         User user = userservice.getUserById(userId);
@@ -77,7 +76,7 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto searchBooking(Long userId, Long bookingId) {
         return BookingMapper.toBookingDto(bookingRepository.findByIdAndUserId(bookingId, userId)
                 .orElseThrow(() ->
-                        new InvalidBookingIdException("Бронирование для пользователя с id " + userId + " не найдено")));
+                        new InvalidIdException("Бронирование для пользователя с id " + userId + " не найдено")));
     }
 
     public List<BookingDto> searchBookingsWithState(Long userId, Status state) {

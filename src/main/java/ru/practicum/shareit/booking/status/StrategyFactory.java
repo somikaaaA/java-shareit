@@ -2,7 +2,6 @@ package ru.practicum.shareit.booking.status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.practicum.shareit.exception.InvalidParameterForBooking;
 
 import java.util.HashMap;
 import java.util.Map;

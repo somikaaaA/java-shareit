@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.exception.BadRequestException;
-import ru.practicum.shareit.exception.InvalidItemIdException;
+import ru.practicum.shareit.exception.InvalidIdException;
 import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.CommentMapper;
 import ru.practicum.shareit.item.model.Comment;
@@ -36,7 +36,7 @@ public class CommentServiceImpl implements CommentService {
         User author = userService.getUserById(userId);
         log.info("Поиск вещи с id {} для которой добавляется комментарий", itemId);
         Item item = itemRepository.findById(itemId)
-                .orElseThrow(() -> new InvalidItemIdException("Вещь с id " + itemId + " не найдена"));
+                .orElseThrow(() -> new InvalidIdException("Вещь с id " + itemId + " не найдена"));
         Booking booking = bookingRepository.findByBookerIdAndItemId(userId, itemId)
                 .orElseThrow(() ->
                         new BadRequestException("Пользователь " + author.getName() + " id " + author.getId() + " не брал вещь " + item.getName() + " id " + item.getId() + " в аренду"));
