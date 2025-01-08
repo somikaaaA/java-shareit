@@ -59,7 +59,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
-    public ErrorResponse invalidUserId(InvalidUserIdException e) { //исключение для некорректного номер id user
+    public ErrorResponse invalidUserId(InvalidIdException e) { //исключение для некорректного номер id user
         log.error("Неверно указан userId");
         return new ErrorResponse("В запросе неверно указан userId " + e.getMessage());
     }
@@ -73,21 +73,21 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
-    public ErrorResponse invalidItemId(InvalidItemIdException e) { //исключение для некорректного номер id item
+    public ErrorResponse invalidItemId(InvalidIdException e) { //исключение для некорректного номер id item
         log.error("Неверно указан itemId");
         return new ErrorResponse("В запросе неверно указан itemId" + e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
-    public ErrorResponse invalidBookingId(InvalidBookingIdException e) { //исключение для некорректного номер id booking
+    public ErrorResponse invalidBookingId(InvalidFieldException e) { //исключение для некорректного номер id booking
         log.error("Неверно указан bookingId");
         return new ErrorResponse("В запросе неверно указан bookingId" + e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500
-    public ErrorResponse invalidBookingParameter(InvalidParameterForBooking e) { //исключение для некорректного параметра бронирования
+    public ErrorResponse invalidBookingParameter(InvalidFieldException e) { //исключение для некорректного параметра бронирования
         log.error("Неверно указан параметр booking " + e.getMessage());
         return new ErrorResponse("В запросе неверно указан параметр " + e.getMessage());
     }
