@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isEmailRegistered(String email) {
-        return isEmailRegistered(email);
+        return userRepository.existsByEmail(email);
     }
 
     @Override
