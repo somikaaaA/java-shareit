@@ -2,6 +2,7 @@ package ru.practicum.shareit.item.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.model.User;
 
 @Getter
@@ -26,5 +27,5 @@ public class Item {
     private User owner;
     @OneToOne
     @JoinColumn(name = "request", referencedColumnName = "id")
-    private Long request;
+    private ItemRequest request;
 }

@@ -26,32 +26,32 @@ import java.util.List;
 public class BookingController {
     private final BookingService bookingService;
 
-    @PostMapping //Добавление нового бронирования
+    @PostMapping
     public BookingDto add(@UserIdValid @RequestHeader("X-Sharer-User-Id") Long userId,
                           @Valid @RequestBody BookingDto bookingDto) {
 
         return bookingService.createBooking(userId, bookingDto);
     }
 
-    @PatchMapping("/{bookingId}") //Подтверждение или отклонение запроса на бронирование
+    @PatchMapping("/{bookingId}")
     public BookingDto addApprove(@RequestHeader("X-Sharer-User-Id") Long userId,
                                  @PathVariable Long bookingId,
                                  @RequestParam(name = "approved") boolean approved) {
         return bookingService.createApprove(userId, bookingId, approved);
     }
 
-    @GetMapping("/owner") //поиск бронирований для хозяина вещей
+    @GetMapping("/owner")
     public List<BookingDto> searchBookingsForOwner(@UserIdValid @RequestHeader("X-Sharer-User-Id") Long ownerId) {
         return bookingService.searchBookingsForOwner(ownerId);
     }
 
-    @GetMapping("/{bookingId}") //поиск бронирования по id
+    @GetMapping("/{bookingId}")
     public BookingDto searchBookingByIdForOwnerOrForBooker(@UserIdValid @RequestHeader("X-Sharer-User-Id") Long userId,
                                                            @PathVariable Long bookingId) {
         return bookingService.searchBooking(userId, bookingId);
     }
 
-    @GetMapping //GET /bookings?state={state} //поиск бронирования со статусом
+    @GetMapping
     public List<BookingDto> searchBookingForUserWithState(@UserIdValid @RequestHeader("X-Sharer-User-Id") Long userId,
                                                           @RequestParam(name = "state", defaultValue = "ALL") Status state) {
         return bookingService.searchBookingsWithState(userId, state);

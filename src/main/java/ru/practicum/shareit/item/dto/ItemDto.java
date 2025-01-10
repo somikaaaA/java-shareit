@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.item.model.Comment;
+import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.model.User;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class ItemDto {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User owner;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Long request;
+    private ItemRequest request;
     private Booking lastBooking;
     private Booking nextBooking;
     private List<Comment> comments;

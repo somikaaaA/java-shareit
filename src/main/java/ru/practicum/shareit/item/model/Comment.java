@@ -10,12 +10,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = "id") // Используем id для equals и hashCode
+@EqualsAndHashCode(of = "id")
 
 @Builder
 @Entity
 @Table(name = "comments", schema = "public")
-@AllArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +29,4 @@ public class Comment {
     private User author;
     @Column(name = "created", nullable = false)
     private LocalDateTime created;
-
-    public Comment() {
-    }
 }
