@@ -9,6 +9,7 @@ import ru.practicum.shareit.user.repository.UpdateUserRequest;
 import ru.practicum.shareit.user.service.UserService;
 import ru.practicum.shareit.validation.UserIdValid;
 
+
 @RestController
 @RequestMapping(path = "/users")
 @RequiredArgsConstructor
@@ -17,7 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public UserDto getUser(@UserIdValid @PathVariable Long id) {
+    public UserDto getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
