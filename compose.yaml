@@ -10,10 +10,10 @@ services:
       - POSTGRES_DB=shareIt
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=12345
-    healthcheck:
+    healthcheck: #секция  обеспечения того, что другие контейнеры (например, ваше приложение) не будут пытаться подключиться к базе данных, пока она не будет готова.
       test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
-      timeout: 20s
-      interval: 20s
+      timeout: 5s
+      interval: 5s
       retries: 10
 
 

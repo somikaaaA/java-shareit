@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.repository.UpdateUserRequest;
 import ru.practicum.shareit.user.service.UserService;
-import ru.practicum.shareit.validation.UserIdValid;
+import ru.practicum.shareit.validate.UserIdValid;
 
 
 @RestController

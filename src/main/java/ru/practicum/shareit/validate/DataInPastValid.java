@@ -1,4 +1,4 @@
-package ru.practicum.shareit.validation;
+package ru.practicum.shareit.validate;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
