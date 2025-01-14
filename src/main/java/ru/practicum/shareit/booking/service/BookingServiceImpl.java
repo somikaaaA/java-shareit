@@ -11,6 +11,8 @@ import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.booking.stateStrategy.Status;
 import ru.practicum.shareit.booking.stateStrategy.Strategy;
 import ru.practicum.shareit.booking.stateStrategy.StrategyFactory;
+import ru.practicum.shareit.exception.InvalidBookingIdException;
+import ru.practicum.shareit.exception.InvalidItemIdException;
 import ru.practicum.shareit.exception.InvalidParameterForBooking;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.ItemRepository;
