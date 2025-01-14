@@ -1,4 +1,4 @@
-package ru.practicum.shareit.booking.status;
+package ru.practicum.shareit.booking.stateStrategy;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,25 +7,27 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 @Transactional(readOnly = true)
-public class StrategyWaiting implements Strategy {
+public class StrategyFuture implements Strategy {
     private final BookingRepository bookingRepository;
 
     @Override
     public List<Booking> searchBookings(Long id) {
-        log.info("Поиск бронирований со статусом WAITING (ожидающих одобрения) для пользователя" + id);
-        return bookingRepository.findByUserIdAndStatus(
+        log.info("Поиск бронирований со статусом FUTURE (будущих) для пользователя" + id);
+        return bookingRepository.findByUserIdFutureBook(
                 id,
-                Status.WAITING);
+                LocalDateTime.now());
     }
 
     @Override
     public Status getStatusName() {
-        return Status.WAITING;
+        return Status.FUTURE;
     }
 }
+

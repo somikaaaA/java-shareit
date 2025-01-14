@@ -1,8 +1,8 @@
-package ru.practicum.shareit.booking.status;
+package ru.practicum.shareit.booking.stateStrategy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.practicum.shareit.exception.InvalidBookingFieldException;
+import ru.practicum.shareit.exception.InvalidParameterForBooking;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +20,7 @@ public class StrategyFactory {
     public Strategy findStrategy(Status strategyName) {
         Strategy strategy = strategies.get(strategyName);
         if (strategy == null) {
-            throw new InvalidBookingFieldException("Некорректный параметр запроса state " + strategyName);
+            throw new InvalidParameterForBooking("Некорректный параметр запроса state " + strategyName);
         }
         return strategy;
     }

@@ -13,6 +13,6 @@ public class ItemRequestDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
     private String description;
-    private User requester;
+    private User requestor;
     private LocalDateTime created;
 }

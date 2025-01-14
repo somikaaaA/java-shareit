@@ -32,6 +32,7 @@ public class UpdateItemRequest {
     public boolean hasRequest() {
         return request != null;
     }
+
 }
 
 

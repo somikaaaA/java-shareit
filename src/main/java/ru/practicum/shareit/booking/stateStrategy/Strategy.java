@@ -1,4 +1,4 @@
-package ru.practicum.shareit.booking.status;
+package ru.practicum.shareit.booking.stateStrategy;
 
 import ru.practicum.shareit.booking.model.Booking;
 

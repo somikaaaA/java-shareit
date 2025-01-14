@@ -24,8 +24,9 @@ public class ItemDto {
     private String description;
     @NotNull(message = "Поле available обязательно для указания")
     private Boolean available;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private User owner;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //аннотация указывает,
+    // что поле будет доступно только для записи (т.е. для десериализации из JSON), но не будет включено в JSON при сериализации.
+    private User owner; //владелец вещи
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ItemRequest request;
     private Booking lastBooking;

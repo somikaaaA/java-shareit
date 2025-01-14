@@ -7,6 +7,7 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = EmailRepeatValidator.class)
+// указывает, что аннотация, к которой она применяется, является аннотацией валидации
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EmailRepeatValid {

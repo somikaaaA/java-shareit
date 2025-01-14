@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
-import ru.practicum.shareit.validation.EmailRepeatValid;
+import ru.practicum.shareit.validate.EmailRepeatValid;
 
 @Data
 @Builder
