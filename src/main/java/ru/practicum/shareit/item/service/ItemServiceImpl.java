@@ -29,18 +29,32 @@ public class ItemServiceImpl implements ItemService {
     private final CommentService commentService;
     private final BookingService bookingService;
 
-    @Override
+    public ItemDto getItem(Long id) {
+        return ItemMapper.toItemDto(getItemById(id),
+                lastBookingForItem(id),
+                nextBookingForItem(id),
+                commentsForItem(id));
+    }
+
+    public Item getItemById(Long id) {
+        return itemRepository.findById(id)
+                .orElseThrow(() -> new InvalidItemIdException("Вещь с id " + id + " не найдена"));
+    }
+
+    public List<ItemDto> getItemsForUser(Long userId) {
+        return toListItemDto(itemRepository.findByOwnerId(userId));
+    }
+
     @Transactional
-    public ItemDto createItem(Long userId, ItemDto itemdto) {
+    public ItemDto createItem(Long userId, ItemDto itemDto) {
         User user = userService.getUserById(userId);
-        Item item = ItemMapper.toItem(itemdto, user);
+        Item item = ItemMapper.toItem(itemDto, user);
         return ItemMapper.toItemDto(itemRepository.save(item),
                 lastBookingForItem(item.getId()),
                 nextBookingForItem(item.getId()),
                 commentsForItem(item.getId()));
     }
 
-    @Override
     @Transactional
     public ItemDto updateItem(UpdateItemRequest request) {
         Item item = getItemById(request.getId());
@@ -52,26 +66,6 @@ public class ItemServiceImpl implements ItemService {
                 commentsForItem(item.getId()));
     }
 
-    @Override
-    public ItemDto getItem(Long id) {
-        return ItemMapper.toItemDto(getItemById(id),
-                lastBookingForItem(id),
-                nextBookingForItem(id),
-                commentsForItem(id));
-    }
-
-    @Override
-    public Item getItemById(Long id) {
-        return itemRepository.findById(id)
-                .orElseThrow(() -> new InvalidItemIdException("Вещь с id " + id + " не найдена"));
-    }
-
-    @Override
-    public List<ItemDto> getItemsForUser(Long userId) {
-        return toListItemDto(itemRepository.findByOwnerId(userId));
-    }
-
-    @Override
     public List<ItemDto> searchItems(String text) {
         if (text.isEmpty()) {
             return Collections.emptyList();
@@ -79,7 +73,6 @@ public class ItemServiceImpl implements ItemService {
         return toListItemDto(itemRepository.findByNameContaining(text));
     }
 
-    @Override
     public boolean isItemRegistered(Long id) {
         return itemRepository.findById(id).isPresent();
     }

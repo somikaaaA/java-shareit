@@ -41,7 +41,7 @@ public class CommentServiceImpl implements CommentService {
                 .orElseThrow(() ->
                         new BadRequestException("Пользователь " + author.getName() + " id " + author.getId() + " не брал вещь " + item.getName() + " id " + item.getId() + " в аренду"));
 
-        if (booking.getEnd().isAfter(LocalDateTime.now())) { //нельзя комментировать текущее бронирование
+        if (booking.getEnd().isAfter(LocalDateTime.now())) {
             throw new BadRequestException("Пользователь " + author.getName() + " комментирует вещь " + item.getName() +
                     " при текущем бронировании");
         }

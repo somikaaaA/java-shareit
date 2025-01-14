@@ -5,11 +5,11 @@ import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.repository.UpdateUserRequest;
 
 public interface UserService {
-    UserDto createUser(UserDto userDto);
-
     UserDto getUser(Long id);
 
     User getUserById(Long id);
+
+    UserDto createUser(UserDto userDto);
 
     boolean isEmailRegistered(String email);
 
@@ -18,4 +18,5 @@ public interface UserService {
     UserDto updateUser(UpdateUserRequest request);
 
     boolean isUserRegistered(Long id);
+
 }

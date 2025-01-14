@@ -16,12 +16,13 @@ import java.util.List;
 @Builder
 public class ItemDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    //Свойство может быть только для чтения. Запрет на изменение через JSon
     private Long id;
-    @NotBlank(message = "Поле name должно быть заполнено")
+    @NotBlank(message = "Поле name не должно быть пустым")
     private String name;
-    @NotBlank(message = "Поле description должно быть заполнено")
+    @NotBlank(message = "Поле description не должно быть пустым")
     private String description;
-    @NotNull(message = "Поле available должно быть заполнено")
+    @NotNull(message = "Поле available обязательно для указания")
     private Boolean available;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User owner;
@@ -30,4 +31,5 @@ public class ItemDto {
     private Booking lastBooking;
     private Booking nextBooking;
     private List<Comment> comments;
+
 }

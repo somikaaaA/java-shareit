@@ -1,8 +1,22 @@
 package ru.practicum.shareit.item.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import ru.practicum.shareit.user.model.User;
+
 
 import java.time.LocalDateTime;
 
@@ -11,10 +25,10 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @EqualsAndHashCode(of = "id")
-
 @Builder
 @Entity
 @Table(name = "comments", schema = "public")
+@AllArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +43,7 @@ public class Comment {
     private User author;
     @Column(name = "created", nullable = false)
     private LocalDateTime created;
+
+    public Comment() {
+    }
 }

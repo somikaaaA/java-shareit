@@ -29,7 +29,6 @@ public class BookingController {
     @PostMapping
     public BookingDto add(@UserIdValid @RequestHeader("X-Sharer-User-Id") Long userId,
                           @Valid @RequestBody BookingDto bookingDto) {
-
         return bookingService.createBooking(userId, bookingDto);
     }
 
@@ -56,5 +55,4 @@ public class BookingController {
                                                           @RequestParam(name = "state", defaultValue = "ALL") Status state) {
         return bookingService.searchBookingsWithState(userId, state);
     }
-
 }

@@ -11,9 +11,9 @@ import ru.practicum.shareit.booking.status.Status;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.booking.status.Strategy;
 import ru.practicum.shareit.booking.status.StrategyFactory;
-import ru.practicum.shareit.exception.InvalidBookingFieldException;
 import ru.practicum.shareit.exception.InvalidBookingIdException;
 import ru.practicum.shareit.exception.InvalidItemIdException;
+import ru.practicum.shareit.exception.InvalidBookingFieldException;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.user.model.User;
@@ -32,6 +32,7 @@ public class BookingServiceImpl implements BookingService {
     private final ItemRepository itemRepository;
     private final StrategyFactory strategyFactory;
 
+    @Override
     @Transactional
     public BookingDto createBooking(Long userId, BookingDto bookingDto) {
         if (bookingDto.getStart().equals(bookingDto.getEnd())) {
@@ -50,6 +51,7 @@ public class BookingServiceImpl implements BookingService {
         return savedBookingDto;
     }
 
+    @Override
     @Transactional
     public BookingDto createApprove(Long userId, Long bookingId, boolean approved) {
         Booking booking = bookingRepository.findById(bookingId)
@@ -59,42 +61,45 @@ public class BookingServiceImpl implements BookingService {
             throw new InvalidBookingFieldException("Статус может менять только хозяин вещи. Пользователь с id " +
                     userId + " не является хозяином вещи с id " + booking.getItem().getId());
         }
-        User user = userservice.getUserById(userId);
+        //User user = userservice.getUserById(userId);
         if (approved) {
             booking.setStatus(Status.APPROVED);
         } else {
             booking.setStatus(Status.REJECTED);
         }
-        log.info("Сохранение " + booking + " в базу данных");
         return  BookingMapper.toBookingDto(bookingRepository.save(booking));
 
     }
 
+    @Override
     public List<BookingDto> searchBookingsForOwner(Long ownerId) {
         return toListBookingDto(bookingRepository.findByItemOwnerId(ownerId));
     }
 
+    @Override
     public BookingDto searchBooking(Long userId, Long bookingId) {
         return BookingMapper.toBookingDto(bookingRepository.findByIdAndUserId(bookingId, userId)
                 .orElseThrow(() ->
                         new InvalidBookingIdException("Бронирование для пользователя с id " + userId + " не найдено")));
     }
 
+    @Override
     public List<BookingDto> searchBookingsWithState(Long userId, Status state) {
         Strategy strategy = strategyFactory.findStrategy(state);
         return toListBookingDto(strategy.searchBookings(userId));
     }
 
-    public Booking lastBookingForItem(Long id) {
+    @Override
+    public Booking lastBookingForItem(Long id) { //текущее бронирование
         return bookingRepository.findByItemIdCurrentBook(id, LocalDateTime.now())
                 .orElse(null);
     }
 
-    public Booking nextBookingForItem(Long id) {
+    @Override
+    public Booking nextBookingForItem(Long id) { //следующее бронирование
         return bookingRepository.findFirstByItemIdAndStartAfterOrderByStartAsc(id, LocalDateTime.now())
                 .orElse(null);
     }
-
 
     private List<BookingDto> toListBookingDto(List<Booking> list) {
         return list.stream()

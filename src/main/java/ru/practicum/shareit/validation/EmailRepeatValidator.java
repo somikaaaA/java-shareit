@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import ru.practicum.shareit.exception.InvalidEmailException;
 import ru.practicum.shareit.user.service.UserService;
 
-
 @RequiredArgsConstructor
 
 public class EmailRepeatValidator implements ConstraintValidator<EmailRepeatValid, String> {

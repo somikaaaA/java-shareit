@@ -7,15 +7,15 @@ import ru.practicum.shareit.item.repository.UpdateItemRequest;
 import java.util.List;
 
 public interface ItemService {
-    ItemDto createItem(Long userId, ItemDto itemdto);
-
-    ItemDto updateItem(UpdateItemRequest request);
-
     ItemDto getItem(Long id);
 
     Item getItemById(Long id);
 
     List<ItemDto> getItemsForUser(Long userId);
+
+    ItemDto createItem(Long userId, ItemDto itemdto);
+
+    ItemDto updateItem(UpdateItemRequest request);
 
     List<ItemDto> searchItems(String text);
 
