@@ -1,4 +1,4 @@
-package ru.practicum.shareit.booking.stateStrategy;
+package ru.practicum.shareit.booking.status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

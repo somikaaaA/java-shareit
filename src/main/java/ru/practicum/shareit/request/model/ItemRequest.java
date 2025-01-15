@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 public class ItemRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  //уникальный идентификатор запроса
+    private Long id;
     @Column(nullable = false)
-    private String description; // текст запроса, содержащий описание требуемой вещи
+    private String description;
     @ManyToOne
     @JoinColumn(referencedColumnName = "id", nullable = false)
-    private User requestor; //пользователь, создавший запрос
-    private LocalDateTime created; // дата и время создания запроса
+    private User requester;
+    private LocalDateTime created;
 }

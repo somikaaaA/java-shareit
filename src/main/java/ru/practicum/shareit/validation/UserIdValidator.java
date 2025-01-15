@@ -17,7 +17,7 @@ public class UserIdValidator implements ConstraintValidator<UserIdValid, Long> {
     @Override
     public boolean isValid(Long id, ConstraintValidatorContext context) {
         if (id == 0 || !userService.isUserRegistered(id)) {
-            throw new InvalidUserIdException("Пользователь с userId= " + id + "не найден");
+            throw new InvalidUserIdException("Пользователь с user Id = " + id + " не найден");
         }
         return true;
     }

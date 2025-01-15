@@ -5,32 +5,30 @@ import lombok.*;
 import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.model.User;
 
-
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode(of = "id")
-
 @Builder
 @Entity
 @Table(name = "items", schema = "public")
 @AllArgsConstructor
-public class Item { //вещь
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  //уникальный идентификатор вещи
+    private Long id;
     @Column(nullable = false)
-    private String name; //краткое название, не должно быть пустым
+    private String name;
     @Column(nullable = false)
-    private String description; // развёрнутое описание
+    private String description;
     @Column(nullable = false)
-    private Boolean available; //статус о том, доступна или нет вещь для аренды //должен быть указан
+    private Boolean available;
     @ManyToOne
     @JoinColumn(name = "owner", referencedColumnName = "id", nullable = false)
-    private User owner; //владелец вещи
+    private User owner;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request", referencedColumnName = "id")
-    private ItemRequest request; // если вещь была создана по запросу другого пользователя, то в этом поле будет храниться ссылка на соответствующий запрос
+    private ItemRequest request;
 
     public Item() {
     }

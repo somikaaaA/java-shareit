@@ -8,9 +8,9 @@ import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingMapper;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.repository.BookingRepository;
-import ru.practicum.shareit.booking.stateStrategy.Status;
-import ru.practicum.shareit.booking.stateStrategy.Strategy;
-import ru.practicum.shareit.booking.stateStrategy.StrategyFactory;
+import ru.practicum.shareit.booking.status.Status;
+import ru.practicum.shareit.booking.status.Strategy;
+import ru.practicum.shareit.booking.status.StrategyFactory;
 import ru.practicum.shareit.exception.InvalidBookingIdException;
 import ru.practicum.shareit.exception.InvalidItemIdException;
 import ru.practicum.shareit.exception.InvalidParameterForBooking;
@@ -59,7 +59,6 @@ public class BookingServiceImpl implements BookingService {
             throw new InvalidParameterForBooking("Статус может менять только хозяин вещи. Пользователь с id " +
                     userId + " не является хозяином вещи с id " + booking.getItem().getId());
         }
-        User user = userservice.getUserById(userId);
         if (approved) {
             booking.setStatus(Status.APPROVED);
         } else {
@@ -67,7 +66,6 @@ public class BookingServiceImpl implements BookingService {
         }
         log.info("Сохранение " + booking + " в базу данных");
         return  BookingMapper.toBookingDto(bookingRepository.save(booking));
-
     }
 
     public List<BookingDto> searchBookingsForOwner(Long ownerId) {
@@ -85,16 +83,15 @@ public class BookingServiceImpl implements BookingService {
         return toListBookingDto(strategy.searchBookings(userId));
     }
 
-    public Booking lastBookingForItem(Long id) { //текущее бронирование
+    public Booking lastBookingForItem(Long id) {
         return bookingRepository.findByItemIdCurrentBook(id, LocalDateTime.now())
                 .orElse(null);
     }
 
-    public Booking nextBookingForItem(Long id) { //следующее бронирование
+    public Booking nextBookingForItem(Long id) {
         return bookingRepository.findFirstByItemIdAndStartAfterOrderByStartAsc(id, LocalDateTime.now())
                 .orElse(null);
     }
-
 
     private List<BookingDto> toListBookingDto(List<Booking> list) {
         return list.stream()

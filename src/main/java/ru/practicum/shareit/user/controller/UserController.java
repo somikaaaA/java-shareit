@@ -9,7 +9,6 @@ import ru.practicum.shareit.user.repository.UpdateUserRequest;
 import ru.practicum.shareit.user.service.UserService;
 import ru.practicum.shareit.validation.UserIdValid;
 
-
 @RestController
 @RequestMapping(path = "/users")
 @RequiredArgsConstructor

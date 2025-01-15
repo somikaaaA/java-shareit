@@ -1,4 +1,4 @@
-package ru.practicum.shareit.booking.stateStrategy;
+package ru.practicum.shareit.booking.status;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

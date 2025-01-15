@@ -1,10 +1,8 @@
 package ru.practicum.shareit.user.service;
 
-
 import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.repository.UpdateUserRequest;
-
 
 public interface UserService {
     UserDto getUser(Long id);
@@ -20,5 +18,4 @@ public interface UserService {
     UserDto updateUser(UpdateUserRequest request);
 
     boolean isUserRegistered(Long id);
-
 }

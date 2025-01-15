@@ -1,7 +1,8 @@
-package ru.practicum.shareit.item.model;
+package ru.practicum.shareit.item.comment.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.model.User;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = "id") // Используем id для equals и hashCode
+@EqualsAndHashCode(of = "id")
 
 @Builder
 @Entity

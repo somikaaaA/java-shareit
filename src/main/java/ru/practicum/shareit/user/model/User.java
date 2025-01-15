@@ -8,7 +8,6 @@ import lombok.*;
 @Setter
 @ToString
 @EqualsAndHashCode(of = "id")
-
 @Builder
 @Entity
 @Table(name = "users", schema = "public")
@@ -16,11 +15,11 @@ import lombok.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  //уникальный идентификатор пользователя
+    private Long id;
     @Column(nullable = false)
-    private String name; // имя или логин пользователя
+    private String name;
     @Column(nullable = false, unique = true)
-    private String email;  //адрес электронной почты, проверка на уникальность
+    private String email;
 
     public User() {
     }

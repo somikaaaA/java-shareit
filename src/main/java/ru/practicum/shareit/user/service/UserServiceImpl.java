@@ -11,7 +11,6 @@ import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.repository.UpdateUserRequest;
 import ru.practicum.shareit.user.repository.UserRepository;
 
-
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
