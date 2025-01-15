@@ -19,7 +19,7 @@ public class StrategyPast implements Strategy {
 
     @Override
     public List<Booking> searchBookings(Long id) {
-        log.info("Поиск бронирований со статусом PAST (прошедших) для пользователя" + id);
+        log.info("Поиск бронирований со статусом PAST (прошедших) для пользователя {}", id);
         return bookingRepository.findByUserIdPastBook(
                 id,
                 LocalDateTime.now());

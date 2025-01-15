@@ -19,7 +19,7 @@ public class StrategyCurrent implements Strategy {
 
     @Override
     public List<Booking> searchBookings(Long id) {
-        log.info("Поиск бронирований со статусом CURRENT (текущих) для пользователя" + id);
+        log.info("Поиск бронирований со статусом CURRENT (текущих) для пользователя{}", id);
         return bookingRepository.findByUserIdCurrentBook(
                 id,
                 LocalDateTime.now());

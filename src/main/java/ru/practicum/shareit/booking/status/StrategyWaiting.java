@@ -18,7 +18,7 @@ public class StrategyWaiting implements Strategy {
 
     @Override
     public List<Booking> searchBookings(Long id) {
-        log.info("Поиск бронирований со статусом WAITING (ожидающих одобрения) для пользователя" + id);
+        log.info("Поиск бронирований со статусом WAITING (ожидающих одобрения) для пользователя{}", id);
         return bookingRepository.findByUserIdAndStatus(
                 id,
                 Status.WAITING);

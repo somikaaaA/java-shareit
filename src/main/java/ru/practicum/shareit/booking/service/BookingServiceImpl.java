@@ -64,7 +64,7 @@ public class BookingServiceImpl implements BookingService {
         } else {
             booking.setStatus(Status.REJECTED);
         }
-        log.info("Сохранение " + booking + " в базу данных");
+        log.info("Сохранение {} в базу данных", booking);
         return  BookingMapper.toBookingDto(bookingRepository.save(booking));
     }
 

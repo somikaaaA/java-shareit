@@ -23,7 +23,7 @@ public class ErrorHandler {
                 .stream()
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.joining(","));
-        log.error("Пользователь указал некорректные данные. " + response);
+        log.error("Пользователь указал некорректные данные. {}", response);
         return new ErrorResponse("Указаны некорректные данные. " + response);
     }
 
@@ -78,7 +78,7 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500
     public ErrorResponse invalidBookingParameter(InvalidParameterForBooking e) {
-        log.error("Неверно указан параметр booking " + e.getMessage());
+        log.error("Неверно указан параметр booking {}", e.getMessage());
         return new ErrorResponse("В запросе неверно указан параметр " + e.getMessage());
     }
 }

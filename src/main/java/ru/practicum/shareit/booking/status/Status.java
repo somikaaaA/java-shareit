@@ -8,5 +8,5 @@ public enum Status {
     ALL, //все
     CURRENT, //текущие
     PAST, //прошедшие
-    FUTURE; //будущие
+    FUTURE //будущие
 }

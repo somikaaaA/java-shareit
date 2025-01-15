@@ -19,7 +19,7 @@ public class StrategyFuture implements Strategy {
 
     @Override
     public List<Booking> searchBookings(Long id) {
-        log.info("Поиск бронирований со статусом FUTURE (будущих) для пользователя" + id);
+        log.info("Поиск бронирований со статусом FUTURE (будущих) для пользователя {}", id);
         return bookingRepository.findByUserIdFutureBook(
                 id,
                 LocalDateTime.now());

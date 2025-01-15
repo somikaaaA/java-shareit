@@ -18,7 +18,7 @@ public class StrategyRejected implements Strategy {
 
     @Override
     public List<Booking> searchBookings(Long id) {
-        log.info("Поиск бронирований со статусом REJECTED (отклоненных) для пользователя" + id);
+        log.info("Поиск бронирований со статусом REJECTED (отклоненных) для пользователя {}", id);
         return bookingRepository.findByUserIdAndStatus(
                 id,
                 Status.REJECTED);

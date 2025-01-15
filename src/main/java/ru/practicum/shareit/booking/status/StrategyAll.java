@@ -18,7 +18,7 @@ public class StrategyAll implements Strategy {
 
     @Override
     public List<Booking> searchBookings(Long id) {
-        log.info("Поиск бронирований со статусом ALL для пользователя или для бронирующего с id " + id);
+        log.info("Поиск бронирований со статусом ALL для пользователя или для бронирующего с id {}", id);
         return bookingRepository.findByBookerIdOrItemOwnerId(id, id);
     }
 

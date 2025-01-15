@@ -26,7 +26,7 @@ public class StrategyFactory {
     }
 
     private void createStrategy(Set<Strategy> strategySet) {
-        strategies = new HashMap<Status, Strategy>();
+        strategies = new HashMap<>();
         strategySet.forEach(
                 strategy -> strategies.put(strategy.getStatusName(), strategy));
     }
