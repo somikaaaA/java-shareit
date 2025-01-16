@@ -17,8 +17,10 @@ import ru.practicum.shareit.item.repository.UpdateItemRequest;
 import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.service.UserService;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +45,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     public List<ItemDto> getItemsForUser(Long userId) {
-        return toListItemDto(itemRepository.findByOwnerId(userId));
+        List<Object[]> itemsWithDetails = itemRepository.findItemsWithBookingsAndCommentsByUserId(userId);
+        return itemsWithDetails.stream()
+                .map(itemArray -> {
+                    Item item = (Item) itemArray[0];
+                    Booking lastBooking = (Booking) itemArray[1];
+                    Booking nextBooking = (Booking) itemArray[2];
+                    Comment comment = (Comment) itemArray[3];
+                    List<Comment> comments = commentService.commentsForItem(item.getId());
+                    return ItemMapper.toItemDto(item, lastBooking, nextBooking, comments);
+                })
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -78,15 +90,17 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.findById(id).isPresent();
     }
 
-    private List<ItemDto> toListItemDto(List<Item> list) {
-        return list.stream()
-                .map(item ->
-                        ItemMapper.toItemDto(item,
-                                lastBookingForItem(item.getId()),
-                                nextBookingForItem(item.getId()),
-                                commentsForItem(item.getId()))
-                )
-                .toList();
+    private List<ItemDto> toListItemDto(List<Item> items) {
+        List<ItemDto> itemDtos = new ArrayList<>();
+
+        for (Item item : items) {
+            Booking lastBooking = lastBookingForItem(item.getId());
+            Booking nextBooking = nextBookingForItem(item.getId());
+            List<Comment> comments = commentsForItem(item.getId());
+            itemDtos.add(ItemMapper.toItemDto(item, lastBooking, nextBooking, comments));
+        }
+
+        return itemDtos;
     }
 
     private List<Comment> commentsForItem(Long id) {
