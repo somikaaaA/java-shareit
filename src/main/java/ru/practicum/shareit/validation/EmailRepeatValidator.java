@@ -3,6 +3,7 @@ package ru.practicum.shareit.validation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
+import ru.practicum.shareit.exception.InvalidEmailException;
 import ru.practicum.shareit.user.service.UserService;
 
 @RequiredArgsConstructor
@@ -16,6 +17,9 @@ public class EmailRepeatValidator implements ConstraintValidator<EmailRepeatVali
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        return !userService.isEmailRegistered(email);
+        if (userService.isEmailRegistered(email)) {
+            throw new InvalidEmailException("Данный email " + email + " уже существует в базе");
+        }
+        return true;
     }
 }
