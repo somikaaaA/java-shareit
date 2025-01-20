@@ -114,4 +114,8 @@ public class ItemServiceImpl implements ItemService {
     private Booking nextBookingForItem(Long id) { //следующее бронирование
         return bookingService.nextBookingForItem(id);
     }
+
+    public List<ItemDto> searchItemByRequest(Long id) {
+        return toListItemDto(itemRepository.findByRequestId(id));
+    }
 }

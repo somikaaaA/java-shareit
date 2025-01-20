@@ -24,4 +24,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
             "LEFT JOIN Comment c ON c.item.id = i.id " +
             "WHERE i.owner.id = :userId")
     List<Object[]> findItemsWithBookingsAndCommentsByUserId(@Param("userId") Long userId);
+
+    List<Item> findByRequestId(Long id);
 }

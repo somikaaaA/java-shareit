@@ -20,4 +20,6 @@ public interface ItemService {
     List<ItemDto> searchItems(String text);
 
     boolean isItemRegistered(Long id);
+
+    List<ItemDto> searchItemByRequest(Long id);
 }
