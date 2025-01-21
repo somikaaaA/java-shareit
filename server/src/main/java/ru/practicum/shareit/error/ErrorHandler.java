@@ -18,6 +18,13 @@ import java.util.stream.Collectors;
 public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
+    public ErrorResponse invalidRequestId(RequestIdNotFoundException e) { //исключение для некорректного номер id запроса
+        log.error("Неверно указан requestId");
+        return new ErrorResponse("В запросе неверно указан requestId" + e.getMessage());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND) //404
     public ErrorResponse handleAnnotationsField(ConstraintViolationException e) {
         String response = e.getConstraintViolations()
                 .stream()

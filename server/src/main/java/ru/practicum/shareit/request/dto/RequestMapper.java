@@ -1,10 +1,12 @@
 package ru.practicum.shareit.request.dto;
 
+import lombok.experimental.UtilityClass;
 import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.model.User;
 
 import java.time.LocalDateTime;
 
+@UtilityClass
 public class RequestMapper {
     public static ItemRequestDto toRequestDto(ItemRequest request) {
         return ItemRequestDto.builder()

@@ -41,14 +41,14 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public List<ItemRequestDto> getRequests(Long id) {
         return toListRequestDto(requestRepository.findByRequester(id)).stream()
-                .peek(this::setItems) //добавление подходящих по запросу вещей
+                .peek(this::setItems)
                 .toList();
     }
 
     @Override
     public List<ItemRequestDto> getAllRequests() {
         return toListRequestDto(requestRepository.findAll()).stream()
-                .peek(this::setItems) //добавление подходящих по запросу вещей
+                .peek(this::setItems)
                 .toList();
     }
 

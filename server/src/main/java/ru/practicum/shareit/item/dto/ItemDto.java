@@ -30,4 +30,6 @@ public class ItemDto {
     private Booking lastBooking;
     private Booking nextBooking;
     private List<Comment> comments;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Long requestId;
 }
