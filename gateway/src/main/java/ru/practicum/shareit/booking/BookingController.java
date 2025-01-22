@@ -1,15 +1,14 @@
 package ru.practicum.shareit.booking;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.dto.BookItemRequestDto;
 import ru.practicum.shareit.booking.dto.BookingState;
 
@@ -47,7 +46,7 @@ public class BookingController {
         return client.getBooking(userId, bookingId);
     }
 
-    @PatchMapping("/{bookingId}")
+    @PatchMapping("/{bookingId}") //Подтверждение или отклонение запроса на бронирование
     public ResponseEntity<Object> addApprove(@RequestHeader(X_SHARER_USER_ID) Long userId,
                                              @PathVariable Long bookingId,
                                              @RequestParam(name = "approved") boolean approved) {
@@ -55,9 +54,10 @@ public class BookingController {
         return client.createApprove(userId, bookingId, approved);
     }
 
-    @GetMapping("/owner")
+    @GetMapping("/owner") //поиск бронирований для хозяина вещей
     public ResponseEntity<Object> searchBookingsForOwner(@RequestHeader(X_SHARER_USER_ID) Long ownerId) {
         log.info("Поиск бронирования для хозяина вещей с id {}", ownerId);
         return client.searchBookingsForOwner(ownerId);
     }
+
 }

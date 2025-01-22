@@ -1,4 +1,4 @@
-package ru.practicum.shareit;
+package ru.practicum.shareit.Tests;
 
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +19,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 @SpringBootTest
 @ComponentScan(basePackages = "ru.practicum.shareit")

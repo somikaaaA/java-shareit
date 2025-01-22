@@ -11,9 +11,9 @@ import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 
 @Controller
-@RequestMapping(path = "/bookings")
-@RequiredArgsConstructor
+@RequestMapping("/items")
 @Slf4j
+@RequiredArgsConstructor
 @Validated
 public class ItemController {
     private final ItemClient client;

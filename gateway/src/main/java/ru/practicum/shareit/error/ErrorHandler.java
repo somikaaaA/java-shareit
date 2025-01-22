@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
-    public ErrorResponse handleAnnotationsField(ConstraintViolationException e) {
-        String response = e.getConstraintViolations()
+    public ErrorResponse handleAnnotationsField(ConstraintViolationException e) { //исключение при срабатывании аннотации на отдельных полях (переменные пути)
+        String response = e.getConstraintViolations() //выводим все сообщения через запятую
                 .stream()
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.joining(","));
@@ -31,21 +31,21 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST) //400
-    public ErrorResponse handleMissingHeader(MissingRequestHeaderException e) {
+    public ErrorResponse handleMissingHeader(MissingRequestHeaderException e) { //исключение для отсутствия заголовка X-Sharer-User-Id
         log.error("Отсутствует заголовок X-Sharer-User-Id");
         return new ErrorResponse("Не указан заголовок X-Sharer-User-Id. " + e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST) //400
-    public ErrorResponse handleMissingField(JsonMappingException e) {
+    public ErrorResponse handleMissingField(JsonMappingException e) { //исключение для отсутствия поля в JSOn
         log.error("В JSON не указано обязательно поле");
         return new ErrorResponse("В запросе отсутствует обязательное поле" + e.getMessage());
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleAnnotationsObject(MethodArgumentNotValidException e) {
-        String response = Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage();
+    public ResponseEntity<ErrorResponse> handleAnnotationsObject(MethodArgumentNotValidException e) { //исключение при срабатывании аннотации на объектах
+        String response = Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage(); //можно вернуть массивом все ошибки валидации
         log.error("Пользователь указал некорректные данные." + response);
         ErrorResponse errorResponse = new ErrorResponse("Указаны некорректные данные. " + response);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST); //400

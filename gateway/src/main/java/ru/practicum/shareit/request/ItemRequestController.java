@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
 
 @Controller
-@RequestMapping(path = "/bookings")
-@RequiredArgsConstructor
+@RequestMapping("/requests")
 @Slf4j
+@RequiredArgsConstructor
 @Validated
 public class ItemRequestController {
+
     private final ItemRequestClient client;
     private static final String X_SHARER_USER_ID = "X-Sharer-User-Id";
 

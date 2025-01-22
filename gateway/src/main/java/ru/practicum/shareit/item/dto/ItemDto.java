@@ -2,11 +2,14 @@ package ru.practicum.shareit.item.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@EqualsAndHashCode
+@ToString
 @Builder
 public class ItemDto {
     @NotBlank(message = "Поле name не должно быть пустым")
