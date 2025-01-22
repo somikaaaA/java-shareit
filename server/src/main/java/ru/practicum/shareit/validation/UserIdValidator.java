@@ -3,7 +3,8 @@ package ru.practicum.shareit.validation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
-import ru.practicum.shareit.exception.InvalidUserIdException;
+import ru.practicum.shareit.exception.ItemIdNotFoundException;
+import ru.practicum.shareit.exception.UserIdNotFoundException;
 import ru.practicum.shareit.user.service.UserService;
 
 @RequiredArgsConstructor
@@ -17,7 +18,7 @@ public class UserIdValidator implements ConstraintValidator<UserIdValid, Long> {
     @Override
     public boolean isValid(Long id, ConstraintValidatorContext context) {
         if (id == 0 || !userService.isUserRegistered(id)) {
-            throw new InvalidUserIdException("Пользователь с user Id = " + id + " не найден");
+            throw new UserIdNotFoundException("Пользователь с user Id = " + id + " не найден");
         }
         return true;
     }

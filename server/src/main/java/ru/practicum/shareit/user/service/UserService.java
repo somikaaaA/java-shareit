@@ -11,11 +11,11 @@ public interface UserService {
 
     UserDto createUser(UserDto userDto);
 
-    boolean isEmailRegistered(String email);
-
     void deleteUser(Long id);
 
     UserDto updateUser(UpdateUserRequest request);
 
     boolean isUserRegistered(Long id);
+
+    boolean isEmailRegistered(String email);
 }

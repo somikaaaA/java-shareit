@@ -25,7 +25,6 @@ public class BookingDto {
     private LocalDateTime end;
     private Item item;
     @ItemIdValid
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long itemId;
     private User booker;
     private Status status;

@@ -19,34 +19,42 @@ public class BaseClient {
         this.rest = rest;
     }
 
+    //get запрос по указанному пути
     protected ResponseEntity<Object> get(String path) {
         return get(path, null, null);
     }
 
+    //get запрос с указанием id пользователя
     protected ResponseEntity<Object> get(String path, long userId) {
         return get(path, userId, null);
     }
 
+    //get запрос с параметрами
     protected ResponseEntity<Object> get(String path, Long userId, @Nullable Map<String, Object> parameters) {
         return makeAndSendRequest(HttpMethod.GET, path, userId, parameters, null);
     }
 
+    //post запрос с телом запроса
     protected <T> ResponseEntity<Object> post(String path, T body) {
         return post(path, null, null, body);
     }
 
+    //post запрос с телом запроса и с id пользователя
     protected <T> ResponseEntity<Object> post(String path, long userId, T body) {
         return post(path, userId, null, body);
     }
 
+    //post запрос с телом запроса и с id пользователя
     protected <T> ResponseEntity<Object> post(String path, Long userId, @Nullable Map<String, Object> parameters, T body) {
         return makeAndSendRequest(HttpMethod.POST, path, userId, parameters, body);
     }
 
+    //put запрос с телом запроса и с id пользователя
     protected <T> ResponseEntity<Object> put(String path, long userId, T body) {
         return put(path, userId, null, body);
     }
 
+    //put запрос с телом запроса и с id пользователя
     protected <T> ResponseEntity<Object> put(String path, long userId, @Nullable Map<String, Object> parameters, T body) {
         return makeAndSendRequest(HttpMethod.PUT, path, userId, parameters, body);
     }
@@ -67,24 +75,50 @@ public class BaseClient {
         return makeAndSendRequest(HttpMethod.PATCH, path, userId, parameters, body);
     }
 
+    //delete запрос по указанному пути
     protected ResponseEntity<Object> delete(String path) {
         return delete(path, null, null);
     }
 
+    //delete запрос с id пользователя
     protected ResponseEntity<Object> delete(String path, long userId) {
         return delete(path, userId, null);
     }
 
+    //delete запрос с параметрами
     protected ResponseEntity<Object> delete(String path, Long userId, @Nullable Map<String, Object> parameters) {
         return makeAndSendRequest(HttpMethod.DELETE, path, userId, parameters, null);
     }
 
+    /*
+    Этот метод выполняет основной процесс отправки HTTP-запроса. Он создает HttpEntity, содержащий тело запроса
+     и заголовки, а затем использует RestTemplate для выполнения запроса.
+    Если возникает ошибка HTTP, метод возвращает ответ с кодом ошибки.
+     */
     private <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path, Long userId, @Nullable Map<String, Object> parameters, @Nullable T body) {
         HttpEntity<T> requestEntity = new HttpEntity<>(body, defaultHeaders(userId));
 
+        /*
+        HttpEntity<T>: Этот объект представляет собой HTTP-запрос, который включает как тело
+        запроса (если оно есть), так и заголовки.
+        new HttpEntity<>(body, defaultHeaders(userId)): Конструктор HttpEntity принимает два
+        параметра: тело запроса и заголовки. Заголовки создаются с помощью метода defaultHeaders(userId).
+        */
+
+        // переменная для хранения отета сервера
         ResponseEntity<Object> shareitServerResponse;
         try {
             if (parameters != null) {
+                //Метод exchange выполняет HTTP-запрос.
+                // Он принимает следующие параметры:
+                /*
+                path: Путь к ресурсу.
+                method: Метод HTTP (GET, POST и т.д.).
+                requestEntity: Объект, содержащий тело и заголовки запроса.
+                Object.class: Тип ответа, который ожидается от сервера (в данном случае это Object).
+                parameters: Дополнительные параметры запроса, если они есть.
+                Если parameters не равен null, они передаются в метод exchange.
+                 */
                 shareitServerResponse = rest.exchange(path, method, requestEntity, Object.class, parameters);
             } else {
                 shareitServerResponse = rest.exchange(path, method, requestEntity, Object.class);
@@ -92,9 +126,20 @@ public class BaseClient {
         } catch (HttpStatusCodeException e) {
             return ResponseEntity.status(e.getStatusCode()).body(e.getResponseBodyAsByteArray());
         }
+        /*
+            случае возникновения исключения метод возвращает
+            новый объект ResponseEntity, содержащий
+            статус ошибки и тело ответа, полученное от
+            сервера (в виде массива байтов).
+             */
         return prepareGatewayResponse(shareitServerResponse);
     }
 
+    /*
+    Создает и возвращает стандартные заголовки для запросов,
+    включая заголовок X-Sharer-User -Id,
+    если указан ID пользователя.
+     */
     private HttpHeaders defaultHeaders(Long userId) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -105,6 +150,11 @@ public class BaseClient {
         return headers;
     }
 
+    /*
+    Подготавливает ответ от сервера, проверяя,
+    успешен ли запрос (статус кода 2xx).
+    Если ответ содержит тело, оно добавляется в ответ.
+     */
     private static ResponseEntity<Object> prepareGatewayResponse(ResponseEntity<Object> response) {
         if (response.getStatusCode().is2xxSuccessful()) {
             return response;
