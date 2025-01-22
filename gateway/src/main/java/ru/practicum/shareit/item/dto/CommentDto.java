@@ -2,11 +2,8 @@ package ru.practicum.shareit.item.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 @Builder
-@ToString
 public class CommentDto {
     private Long id;
     private String text;

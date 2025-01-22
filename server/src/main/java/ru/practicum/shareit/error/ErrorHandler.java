@@ -21,15 +21,15 @@ import java.util.stream.Collectors;
 public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
-    public ErrorResponse invalidRequestId(RequestIdNotFoundException e) { //исключение для некорректного номер id запроса
+    public ErrorResponse invalidRequestId(RequestIdNotFoundException e) {
         log.error("Неверно указан requestId");
         return new ErrorResponse("В запросе неверно указан requestId" + e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
-    public ErrorResponse handleAnnotationsField(ConstraintViolationException e) { //исключение при срабатывании аннотации на отдельных полях (переменные пути)
-        String response = e.getConstraintViolations() //выводим все сообщения через запятую
+    public ErrorResponse handleAnnotationsField(ConstraintViolationException e) {
+        String response = e.getConstraintViolations()
                 .stream()
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.joining(","));
@@ -54,42 +54,42 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST) //400
-    public ErrorResponse handleMissingHeader(MissingRequestHeaderException e) { //исключение для отсутствия заголовка X-Sharer-User-Id
+    public ErrorResponse handleMissingHeader(MissingRequestHeaderException e) {
         log.error("Отсутствует заголовок X-Sharer-User-Id");
         return new ErrorResponse("Не указан заголовок X-Sharer-User-Id. " + e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST) //400
-    public ErrorResponse handleMissingField(JsonMappingException e) { //исключение для отсутствия поля в JSOn
+    public ErrorResponse handleMissingField(JsonMappingException e) {
         log.error("В JSON не указано обязательно поле");
         return new ErrorResponse("В запросе отсутствует обязательное поле" + e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
-    public ErrorResponse invalidUserId(UserIdNotFoundException e) { //исключение для некорректного номер id user
+    public ErrorResponse invalidUserId(UserIdNotFoundException e) {
         log.error("Неверно указан userId");
         return new ErrorResponse("В запросе неверно указан userId " + e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500
-    public ErrorResponse invalidEmail(InvalidEmailException e) { //исключение для некорректного email
+    public ErrorResponse invalidEmail(InvalidEmailException e) {
         log.error("Неверно указан email");
         return new ErrorResponse("В запросе неверно указан email. " + e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
-    public ErrorResponse invalidItemId(ItemIdNotFoundException e) { //исключение для некорректного номер id item
+    public ErrorResponse invalidItemId(ItemIdNotFoundException e) {
         log.error("Неверно указан itemId");
         return new ErrorResponse("В запросе неверно указан itemId" + e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
-    public ErrorResponse invalidBookingId(BookingIdNotFoundException e) { //исключение для некорректного номер id booking
+    public ErrorResponse invalidBookingId(BookingIdNotFoundException e) {
         log.error("Неверно указан bookingId");
         return new ErrorResponse("В запросе неверно указан bookingId" + e.getMessage());
     }

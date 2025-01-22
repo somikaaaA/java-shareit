@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import ru.practicum.shareit.booking.dto.BookItemRequestDto;
 import ru.practicum.shareit.booking.dto.BookingState;
 
-
 @Controller
 @RequestMapping(path = "/bookings")
 @RequiredArgsConstructor
@@ -48,7 +47,7 @@ public class BookingController {
         return client.getBooking(userId, bookingId);
     }
 
-    @PatchMapping("/{bookingId}") //Подтверждение или отклонение запроса на бронирование
+    @PatchMapping("/{bookingId}")
     public ResponseEntity<Object> addApprove(@RequestHeader(X_SHARER_USER_ID) Long userId,
                                              @PathVariable Long bookingId,
                                              @RequestParam(name = "approved") boolean approved) {
@@ -56,7 +55,7 @@ public class BookingController {
         return client.createApprove(userId, bookingId, approved);
     }
 
-    @GetMapping("/owner") //поиск бронирований для хозяина вещей
+    @GetMapping("/owner")
     public ResponseEntity<Object> searchBookingsForOwner(@RequestHeader(X_SHARER_USER_ID) Long ownerId) {
         log.info("Поиск бронирования для хозяина вещей с id {}", ownerId);
         return client.searchBookingsForOwner(ownerId);

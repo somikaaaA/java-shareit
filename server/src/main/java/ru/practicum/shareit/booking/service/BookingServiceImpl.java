@@ -84,12 +84,12 @@ public class BookingServiceImpl implements BookingService {
         return toListBookingDto(strategy.searchBookings(userId));
     }
 
-    public Booking lastBookingForItem(Long id) { //текущее бронирование
+    public Booking lastBookingForItem(Long id) {
         return bookingRepository.findByItemIdCurrentBook(id, LocalDateTime.now())
                 .orElse(null);
     }
 
-    public Booking nextBookingForItem(Long id) { //следующее бронирование
+    public Booking nextBookingForItem(Long id) {
         return bookingRepository.findFirstByItemIdAndStartAfterOrderByStartAsc(id, LocalDateTime.now())
                 .orElse(null);
     }
