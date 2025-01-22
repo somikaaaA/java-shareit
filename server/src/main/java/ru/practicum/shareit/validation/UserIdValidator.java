@@ -3,7 +3,6 @@ package ru.practicum.shareit.validation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
-import ru.practicum.shareit.exception.ItemIdNotFoundException;
 import ru.practicum.shareit.exception.UserIdNotFoundException;
 import ru.practicum.shareit.user.service.UserService;
 
