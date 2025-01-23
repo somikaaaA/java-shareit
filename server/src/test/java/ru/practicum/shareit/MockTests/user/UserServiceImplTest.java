@@ -21,21 +21,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-/*
-используется для юнит-тестирования и не создает контекст Spring. Он предназначен
-для изолированного тестирования классов и методов.
- */
 public class UserServiceImplTest {
     @Mock
     private UserRepository userRepository;
 
     @InjectMocks
-    /*
-    аннотация используется для создания экземпляра тестируемого класса (User Service) и
-    автоматического внедрения в него мок-объектов, которые
-    были созданы с помощью аннотации @Mock. Mockito ищет поля, помеченные аннотацией
-     @Mock, и автоматически инжектирует их в тестируемый объект.
-     */
     private UserServiceImpl userService;
 
     private UserDto userDto, expectedUserDto;

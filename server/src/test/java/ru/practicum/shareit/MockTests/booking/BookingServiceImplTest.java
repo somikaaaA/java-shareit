@@ -26,8 +26,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -82,7 +81,7 @@ public class BookingServiceImplTest {
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
         when(bookingRepository.save(any(Booking.class))).thenReturn(booking);
         BookingDto savedBookingDto = bookingService.createBooking(user.getId(), bookingDto);
-        assertEquals(null, savedBookingDto.getItemId());
+        assertNull(savedBookingDto.getItemId());
         verify(bookingRepository).save(any(Booking.class));
     }
 
@@ -203,7 +202,7 @@ public class BookingServiceImplTest {
     void lastBookingForItemWhenNoCurrentBooking() {
         when(bookingRepository.findByItemIdCurrentBook(anyLong(), any())).thenReturn(Optional.empty());
         Booking lastBooking = bookingService.lastBookingForItem(item.getId());
-        assertEquals(null, lastBooking);
+        assertNull(lastBooking);
         verify(bookingRepository).findByItemIdCurrentBook(eq(item.getId()), any(LocalDateTime.class));
     }
 
@@ -221,7 +220,7 @@ public class BookingServiceImplTest {
 
         Booking nextBooking = bookingService.nextBookingForItem(item.getId());
 
-        assertEquals(null, nextBooking);
+        assertNull(nextBooking);
         verify(bookingRepository).findFirstByItemIdAndStartAfterOrderByStartAsc(eq(item.getId()), any(LocalDateTime.class));
     }
 }

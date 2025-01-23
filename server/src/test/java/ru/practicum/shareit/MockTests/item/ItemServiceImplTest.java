@@ -23,8 +23,7 @@ import ru.practicum.shareit.user.service.UserService;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -214,6 +213,6 @@ public class ItemServiceImplTest {
     void isItemRegisteredWhenItemDoesNotExist() {
         when(itemRepository.findById(anyLong())).thenReturn(Optional.empty());
         boolean isRegistered = itemService.isItemRegistered(99L);
-        assertEquals(false, isRegistered);
+        assertFalse(isRegistered);
     }
 }

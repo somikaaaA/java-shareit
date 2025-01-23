@@ -137,5 +137,4 @@ public class UserControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.error").value(containsString("Указаны некорректные данные. Некорректное указание E-mail")));
     }
-
 }

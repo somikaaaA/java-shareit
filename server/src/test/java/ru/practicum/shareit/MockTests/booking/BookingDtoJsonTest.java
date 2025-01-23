@@ -14,8 +14,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @JsonTest
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -26,8 +25,8 @@ public class BookingDtoJsonTest {
     void testBookingDto() throws Exception {
         BookingDto bookingDto = BookingDto.builder()
                 .id(1L)
-                .start(LocalDateTime.of(2025, 02, 12, 12, 00, 00))
-                .end(LocalDateTime.of(2025, 02, 17, 12, 00, 00))
+                .start(LocalDateTime.of(2025, 2, 12, 12, 0, 0))
+                .end(LocalDateTime.of(2025, 2, 17, 12, 0, 0))
                 .itemId(2L)
                 .booker(User.builder()
                         .id(2L)
@@ -92,9 +91,9 @@ public class BookingDtoJsonTest {
                 "}";
         BookingDto deserializedBookingDto = json.parse(jsonString).getObject();
 
-        assertEquals(null, deserializedBookingDto.getId()); //readOnly
-        assertEquals(LocalDateTime.of(2025, 02, 12, 12, 0, 0), deserializedBookingDto.getStart());
-        assertEquals(LocalDateTime.of(2025, 02, 17, 12, 0, 0), deserializedBookingDto.getEnd());
+        assertNull(deserializedBookingDto.getId()); //readOnly
+        assertEquals(LocalDateTime.of(2025, 2, 12, 12, 0, 0), deserializedBookingDto.getStart());
+        assertEquals(LocalDateTime.of(2025, 2, 17, 12, 0, 0), deserializedBookingDto.getEnd());
         assertEquals(2L, deserializedBookingDto.getItemId());
 
         User booker = deserializedBookingDto.getBooker();

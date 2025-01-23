@@ -20,11 +20,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 @SpringBootTest
 @ComponentScan(basePackages = "ru.practicum.shareit")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-@Transactional // Откат транзакции после каждого теста Spring автоматически откатывает транзакцию после каждого теста()
+@Transactional
 public class ItemServiceTest {
     private final ItemService itemService;
     private final UserService userService;

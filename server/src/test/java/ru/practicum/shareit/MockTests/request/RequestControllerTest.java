@@ -141,5 +141,4 @@ public class RequestControllerTest {
                 .andExpect(jsonPath("$[0].id", is(itemRequestDto.getId().intValue())))
                 .andExpect(jsonPath("$[0].description", is(itemRequestDto.getDescription())));
     }
-
 }

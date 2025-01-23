@@ -15,7 +15,6 @@ import ru.practicum.shareit.user.service.UserService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-
 @SpringBootTest
 @ComponentScan(basePackages = "ru.practicum.shareit")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)

@@ -25,7 +25,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-
 @SpringBootTest
 @ComponentScan(basePackages = "ru.practicum.shareit")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -91,8 +90,6 @@ public class StrategyTest {
         assertThat(bookings).containsExactlyInAnyOrder(booking1, booking2);
     }
 
-
-    // Вспомогательный класс для создания моков стратегий
     private static class MockStrategy implements Strategy {
         private final Status statusName;
         private final BookingRepository bookingRepository;
