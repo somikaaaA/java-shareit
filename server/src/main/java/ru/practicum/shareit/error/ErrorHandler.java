@@ -30,14 +30,14 @@ public class ErrorHandler {
         return new ErrorResponse("Указаны некорректные данные. " + response);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleAnnotationsObject(MethodArgumentNotValidException e) {
-        String fieldName = Objects.requireNonNull(e.getBindingResult().getFieldError()).getField();
-        String response = Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage();
-        log.error("Пользователь указал некорректные данные." + response);
-        ErrorResponse errorResponse = new ErrorResponse("Указаны некорректные данные. " + response);
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST); //400
-    }
+//    @ExceptionHandler
+//    public ResponseEntity<ErrorResponse> handleAnnotationsObject(MethodArgumentNotValidException e) {
+//        String fieldName = Objects.requireNonNull(e.getBindingResult().getFieldError()).getField();
+//        String response = Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage();
+//        log.error("Пользователь указал некорректные данные." + response);
+//        ErrorResponse errorResponse = new ErrorResponse("Указаны некорректные данные. " + response);
+//        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST); //400
+//    }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500
