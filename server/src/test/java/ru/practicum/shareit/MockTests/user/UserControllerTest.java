@@ -16,7 +16,6 @@ import ru.practicum.shareit.user.service.UserService;
 
 import java.nio.charset.StandardCharsets;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
