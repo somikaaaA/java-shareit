@@ -8,7 +8,6 @@ import ru.practicum.shareit.user.service.UserService;
 
 
 @RequiredArgsConstructor
-
 public class EmailRepeatValidator implements ConstraintValidator<EmailRepeatValid, String> {
     private final UserService userService;
 

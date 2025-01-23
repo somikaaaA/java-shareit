@@ -10,9 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.repository.BookingRepository;
-import ru.practicum.shareit.booking.stateStrategy.Status;
-import ru.practicum.shareit.booking.stateStrategy.Strategy;
-import ru.practicum.shareit.booking.stateStrategy.StrategyFactory;
+import ru.practicum.shareit.booking.status.Status;
+import ru.practicum.shareit.booking.status.Strategy;
+import ru.practicum.shareit.booking.status.StrategyFactory;
 import ru.practicum.shareit.exception.InvalidParameterForBooking;
 
 import java.time.LocalDateTime;

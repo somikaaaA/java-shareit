@@ -3,7 +3,7 @@ package ru.practicum.shareit.booking.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.practicum.shareit.booking.stateStrategy.Status;
+import ru.practicum.shareit.booking.status.Status;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.validate.DataInPastValid;

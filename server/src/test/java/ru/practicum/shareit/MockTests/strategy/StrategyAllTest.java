@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.repository.BookingRepository;
-import ru.practicum.shareit.booking.stateStrategy.Status;
-import ru.practicum.shareit.booking.stateStrategy.StrategyAll;
+import ru.practicum.shareit.booking.status.Status;
+import ru.practicum.shareit.booking.status.StrategyAll;
 
 import java.util.List;
 

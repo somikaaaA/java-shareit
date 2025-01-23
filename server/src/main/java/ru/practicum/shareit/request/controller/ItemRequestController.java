@@ -10,7 +10,6 @@ import ru.practicum.shareit.validate.UserIdValid;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping(path = "/requests")
 @RequiredArgsConstructor
@@ -38,5 +37,4 @@ public class ItemRequestController {
     public List<ItemRequestDto> getAllRequests() {
         return requestService.getAllRequests();
     }
-
 }
