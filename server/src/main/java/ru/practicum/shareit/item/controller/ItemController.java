@@ -12,6 +12,7 @@ import ru.practicum.shareit.item.service.ItemService;
 import ru.practicum.shareit.validate.ItemIdValid;
 import ru.practicum.shareit.validate.UserIdValid;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -34,6 +35,9 @@ public class ItemController {
 
     @GetMapping("/search")
     public List<ItemDto> searchItems(@RequestParam String text) {
+        if (text == null || text.trim().isEmpty()) {
+            return Collections.emptyList(); // возвращаем пустую коллекцию
+        }
         return itemService.searchItems(text);
     }
 
