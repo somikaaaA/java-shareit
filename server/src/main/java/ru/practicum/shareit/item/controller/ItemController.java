@@ -37,8 +37,9 @@ public class ItemController {
     public List<ItemDto> searchItems(@RequestParam String text) {
         if (text == null || text.trim().isEmpty()) {
             return Collections.emptyList(); // возвращаем пустую коллекцию
+        } else {
+            return itemService.searchItems(text);
         }
-        return itemService.searchItems(text);
     }
 
     @PostMapping
